@@ -74,7 +74,7 @@ print(f"正解数: {seikai_suu} / {kaitou_suu}")
 
 
 if kaitou_suu > 0: #回答数が0じゃなければ、正解率を計算して表示
-    seikai_ritsu = round(seikai_suu / kaitou_suu * 100, 2)
+    seikai_ritsu = round(seikai_suu / kaitou_suu * 100)
     print(f"正解率: {seikai_ritsu}%")
 
 # 間違った問題の問題と回答を表示
