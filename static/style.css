@@ -1,6 +1,9 @@
 body {
     font-family: 'Noto Sans JP', sans-serif;
-    background-color: #ffffe0;
+    background-image: url("../static/images/flower-pattern_10_pink.png");
+    background-repeat: no-repeat;
+    background-size: cover; /* 画面全体に拡大縮小 */
+    background-position: center center; /* 中央配置 */
     margin: 0;
     padding: 0;
 }
