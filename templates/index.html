@@ -1,0 +1,28 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>運勢占いアプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>🌷 運勢占い 🌷</h1>
+        <form action="/result" method="post">
+            <label for="name">お名前:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="kikan">占う期間:</label>
+            <select id="kikan" name="kikan" required>
+                <option value="今日">今日</option>
+                <option value="明日">明日</option>
+                <option value="今週">今週</option>
+            </select>
+
+            <button type="submit">占う！</button>
+        </form>
+    </div>
+</body>
+</html>

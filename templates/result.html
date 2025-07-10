@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>占い結果</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>🌷 占い結果 🌷</h1>
+        <p><strong>{{ name }}さん</strong>の<span class="kikan">{{ kikan }}</span>の運勢はこちら！</p>
+
+        {% for unsei in kekka %}
+            <div class="card">
+                <h2>{{ unsei.type }}</h2>
+                {% if unsei.type == "総合運" %}
+                    <p>{{ unsei.message }}</p>
+                    <p>🎁 ラッキーアイテム: {{ unsei.item }}</p>
+                    <p>🎵 ラッキーミュージック: 
+                        <a href="{{ unsei.music_url }}" target="_blank">{{ unsei.music }}</a>
+                    </p>
+                    <p style="color: {{ unsei.color }}">🎨 ラッキーカラー: {{ unsei.color }}</p>
+                {% else %}
+                    <p>{{ unsei.message }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <a href="/" class="button">もう一度占う</a>
+    </div>
+</body>
+</html>
