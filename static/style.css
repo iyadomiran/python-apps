@@ -8,7 +8,7 @@ body {
 .container {
     max-width: 700px;
     margin: 40px auto;
-    background: white;
+    background: #000000;
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -16,7 +16,7 @@ body {
 
 h1 {
     text-align: center;
-    color: #6c272d;
+    color: #000000;
 }
 
 form {
