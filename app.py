@@ -141,22 +141,22 @@ unsei_data = {
 }
 
 
-@app.route("/")
+@app.route("/") #URLにアクセスしたとき、
 def index():
-    return render_template("index.html")
+    return render_template("index.html") #index.htmlを使ってトップページを表示するよ
 
-@app.route("/result", methods=["POST"])
+@app.route("/result", methods=["POST"]) #「占う！」ボタンを押されてPOST送信されたデータ（名前や期間）を取得。
 def result():
     name = request.form["name"]
     kikan = request.form["kikan"]
 
     kekka_ichiran = []
-    for unsei in unsei_data[kikan]:
+    for unsei in unsei_data[kikan]: #選択された期間に応じてunsei_dataからランダムに占いデータを取得
         result = random.choice(unsei["message"])
-        if unsei["type"] == "総合運":
-            msg, item, music, color = result
-            music_url = music_urls[music]
-            kekka_ichiran.append({
+        if unsei["type"] == "総合運": #「総合運」の場合
+            msg, item, music, color = result #メッセージ、ラッキーアイテム、ラッキーミュージック、色を個別(コンマ区切り)に並べて表示
+            music_url = music_urls[music] #URLも music_urls から取得
+            kekka_ichiran.append({     #占い結果の各項目の情報をまとめて1つの辞書にして管理
                 "type": unsei["type"],
                 "message": msg,
                 "item": item,
@@ -164,13 +164,13 @@ def result():
                 "music_url": music_url,
                 "color": color,
             })
-        else:
+        else: #それ以外（仕事運、学業運、健康運など）は単にメッセージだけ表示
             kekka_ichiran.append({
                 "type": unsei["type"],
                 "message": result,
             })
 
-    return render_template("result.html", name=name, kikan=kikan, kekka=kekka_ichiran)
+    return render_template("result.html", name=name, kikan=kikan, kekka=kekka_ichiran) #result.htmlとを使って結果を返す
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == "__main__": #app.pyを直接実行したらFlaskアプリを起動してね
+    app.run(debug=True) #debug=True →開発の便利モード
