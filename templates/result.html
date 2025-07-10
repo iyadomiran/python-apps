@@ -11,23 +11,61 @@
         <h1>🌷 占い結果 🌷</h1>
         <p><strong>{{ name }}さん</strong>の<span class="kikan">{{ kikan }}</span>の運勢はこちら！</p>
 
-        {% for unsei in kekka %}
-            <div class="card">
-                <h2>{{ unsei.type }}</h2>
-                {% if unsei.type == "総合運" %}
-                    <p>{{ unsei.message }}</p>
-                    <p>🎁 ラッキーアイテム: {{ unsei.item }}</p>
-                    <p>🎵 ラッキーミュージック: 
-                        <a href="{{ unsei.music_url }}" target="_blank">{{ unsei.music }}</a>
-                    </p>
-                    <p style="color: {{ unsei.color }}">🎨 ラッキーカラー: {{ unsei.color }}</p>
-                {% else %}
-                    <p>{{ unsei.message }}</p>
-                {% endif %}
-            </div>
-        {% endfor %}
+        <!-- 結果を1枚ずつ表示するためのカード -->
+        <div class="result-area">
+            {% for unsei in kekka %}
+                <div class="card result-card" style="display: none;">
+                    <h2>{{ unsei.type }}</h2>
+                    {% if unsei.type == "総合運" %}
+                        <p>{{ unsei.message }}</p>
+                        <p>🎁 ラッキーアイテム: {{ unsei.item }}</p>
+                        <p>🎵 ラッキーミュージック: 
+                            <a href="{{ unsei.music_url }}" target="_blank">{{ unsei.music }}</a>
+                        </p>
+                        <p style="color: {{ unsei.color }}">🎨 ラッキーカラー: {{ unsei.color }}</p>
+                    {% else %}
+                        <p>{{ unsei.message }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
 
+        <!-- 次へボタン -->
+        <div id="next-button-area">
+            <button id="next-button" class="button">次の結果を見る</button>
+        </div>
+
+        <!-- X (Twitter) シェアボタン -->
+        <a id="share-button"
+           class="button"
+           href="https://twitter.com/intent/tweet?text={{ name }}さんの{{ kikan }}の運勢をチェックしよう！&url=https://fortune-app-clc6.onrender.com"
+           target="_blank">
+           X（旧Twitter）でシェアする
+        </a>
+
+        <!-- トップに戻るボタン -->
         <a href="/" class="button">もう一度占う</a>
     </div>
+
+    <!-- JavaScript：占い結果を1つずつ表示する処理 -->
+    <script>
+        const cards = document.querySelectorAll('.result-card');
+        const nextButton = document.getElementById('next-button');
+        let currentIndex = 0;
+
+        function showNextCard() {
+            if (currentIndex < cards.length) {
+                cards[currentIndex].style.display = 'block';
+                currentIndex++;
+                if (currentIndex === cards.length) {
+                    nextButton.style.display = 'none'; // 最後のカードでボタン非表示
+                }
+            }
+        }
+
+        // 初回に最初のカードだけ表示
+        showNextCard();
+        nextButton.addEventListener('click', showNextCard);
+    </script>
 </body>
 </html>
