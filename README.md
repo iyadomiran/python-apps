@@ -1,5 +1,4 @@
-⭐️公開中　Flaskで作成したWeb運勢占いアプリ。
-占いアプリを使ってみる（Render）
+⭐️公開中　Flaskで作成したWeb運勢占いアプリ。（Render）
 →　https://fortune-app-clc6.onrender.com
 
 ファイル構成
