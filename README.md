@@ -12,7 +12,7 @@ Flaskで作成した日記感情分析Webアプリ（Render）
 ⸻⸻⸻
 
 ⭐️公開中　Flaskで作成したWeb運勢占いアプリ。（Render）
-→　https://fortune-app-clc6.onrender.com
+→　https://fortune-app-gv8r.onrender.com
 
 📁 ファイル構成（fortune_appフォルダ内）
 ⚫︎fortune_app/app.py ： メイン処理（Flask）
