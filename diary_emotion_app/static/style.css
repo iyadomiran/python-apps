@@ -1,0 +1,198 @@
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-image: url("../static/images/kumo38.png");
+    background-repeat: no-repeat;
+    background-size: cover; /* 背景を画面にフィット */
+    background-position: center center; /* 中央配置 */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* ビューポートの高さを最低限に設定 */
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #d66ba0;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-group label {
+    background: #f8e1ec;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.submit-btn {
+    margin-top: 30px;
+    background-color: #f48fb1;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #ec407a;
+}
+
+/* ここからは結果ページ専用の追加スタイル */
+
+.result-container {
+    max-width: 600px;
+    margin: 50px auto 80px auto;
+    background: #fff0f5; /* 薄いピンク背景 */
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(214, 107, 160, 0.3);
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #5a2d4c;
+}
+
+.result-container h1 {
+    text-align: center;
+    color: #d66ba0;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.result-item {
+    margin-bottom: 18px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.comment {
+    font-style: italic;
+    color: #a54581;
+    margin-top: 10px;
+}
+
+.bar-container {
+    width: 100%;
+    background-color: #f8e1ec;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 25px;
+    margin-top: 8px;
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.7);
+}
+
+/* バーの高さ、背景、丸角、文字配置、アニメーション追加 */
+.bar {
+    height: 100%;
+    background: linear-gradient(90deg, #f48fb1, #ec407a);
+    border-radius: 12px 0 0 12px;
+    transition: width 1.5s ease; /* 幅の変化を滑らかに */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    user-select: none; /* 文字選択禁止 */
+}
+
+/* 日記テキスト表示 */
+.diary-text {
+    background-color: #fff0f5;
+    padding: 15px 20px;
+    border-radius: 12px;
+    white-space: pre-wrap;
+    font-size: 15px;
+    color: #703559;
+    box-shadow: inset 0 0 5px #d66ba0aa;
+    margin-top: 12px;
+}
+
+/* 励ましメッセージ */
+.encourage-message {
+    font-weight: 600;
+    color: #bf467f;
+    margin-top: 25px;
+    text-align: center;
+}
+
+/* シェア・戻る・音楽ボタン共通スタイル */
+.share-button, .back-button, .music-button {
+    display: inline-block;
+    background-color: #f48fb1;
+    color: white;
+    padding: 12px 24px;
+    margin: 20px 10px 0 10px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(214, 107, 160, 0.4);
+    min-width: 140px;
+    user-select: none;
+}
+
+.share-button:hover {
+    background-color: #ec407a;
+}
+
+.back-button {
+    background-color: #d66ba0;
+}
+
+.back-button:hover {
+    background-color: #b23a7c;
+}
+
+/* 追加: 習慣達成率に応じたバッジ表示スタイル */
+.badge {
+    text-align: left; /* 左寄せに修正 */
+    font-size: 20px;
+    margin-top: 15px;
+    color: #5dade2; /* パステルの少し濃いめの水色に調整 */
+    font-weight: bold;
+    user-select: none;
+}

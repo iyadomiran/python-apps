@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>日記感情分析アプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🌸 今日の気分と習慣を記録しよう 🌸</h1>
+        <form method="POST">
+            <label for="username">名前：</label>
+            <input type="text" id="username" name="username" required>
+
+            <label>今日できた習慣を選んでね：</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="habits" value="早起き"> 早起き</label>
+                <label><input type="checkbox" name="habits" value="運動"> 運動</label>
+                <label><input type="checkbox" name="habits" value="勉強"> 勉強</label>
+                <label><input type="checkbox" name="habits" value="日記"> 日記</label>
+            </div>
+
+            <label for="self_score">自己評価（1〜5点）：</label>
+            <select id="self_score" name="self_score" required>
+                <option value="1">1（最低）</option>
+                <option value="2">2</option>
+                <option value="3">3（ふつう）</option>
+                <option value="4">4</option>
+                <option value="5">5（最高）</option>
+            </select>
+
+            <label for="diary">今日の日記：</label>
+            <textarea id="diary" name="diary" rows="5" required></textarea>
+
+            <button type="submit" class="submit-btn">送信</button>
+        </form>
+    </div>
+</body>
+</html>
