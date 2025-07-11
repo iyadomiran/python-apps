@@ -88,8 +88,7 @@ def index():
         encourage_message = random.choice(encouragements)
 
         # ランダムに音楽を選ぶ（曲名とURLを別々に保持）
-        selected_music_title = random.choice(list(music_urls.keys()))
-        selected_music_url = music_urls[selected_music_title]
+        selected_music_url = random.choice(list(music_urls.values()))
 
         # X（旧Twitter）シェア用テキストを作成し、URLエンコードする
         share_text = f"{username}さんの今日の自己評価は{self_score}点。習慣達成率は{achievement_rate}%。{encourage_message}"
