@@ -107,7 +107,6 @@ def index():
                                sentiment_comment=sentiment_comment,
                                share_text_encoded=share_text_encoded,
                                badge=badge,
-                               selected_music_title=selected_music_title,
                                selected_music_url=selected_music_url)
 
     # 初めてページを開いた（GET）のときは入力フォームを表示する
