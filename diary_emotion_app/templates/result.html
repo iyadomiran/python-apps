@@ -3,51 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <title>日記感情分析アプリ - 結果</title>
-  <!-- CSSを読み込む（style.css） -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-  <!-- ページの中央にコンテンツを配置するラッパー -->
-  <div class="container">
-    <!-- メイン見出し -->
+<!-- ページ全体の中央寄せコンテナ -->
+  <div class="result-container">
+
     <h1>日記の結果</h1>
 
-    <!-- ユーザーの名前を表示 -->
     <p><strong>名前：</strong>{{ username }}さん</p>
-
-    <!-- ユーザーが入力した自己評価点数を表示 -->
     <p><strong>自己評価点数：</strong>{{ self_score }} 点</p>
-
-    <!-- 自己評価点数に対する励ましコメントを表示 -->
     <p class="comment">{{ comment }}</p>
 
-    <!-- 習慣達成率をバーで視覚的に表示 -->
+    <!-- 習慣達成率のバー表示 -->
     <p><strong>習慣達成率：</strong></p>
     <div class="bar-container">
-      <!-- 幅が習慣達成率に比例するバーに達成率の文字を表示 -->
-      <div class="bar" style="width: {{ achievement_rate }}%;">{{ achievement_rate }}%</div>
-    </div>
 
-    <!-- 達成率に応じたバッジ表示 -->
+    <!-- 内側のバーの幅を習慣達成率に合わせて調整 -->
+      <div class="bar-inner" style="width: {{ achievement_rate }}%;">
+        {{ achievement_rate }}%
+      </div>
+    </div>
+    <!-- バッジの表示 -->
     <p class="badge">{{ badge }}</p>
 
-    <!-- 感情分析結果 -->
+    <!-- 感情分析の結果 -->
     <p><strong>感情分析結果：</strong>{{ sentiment }}</p>
     <p class="sentiment-comment">{{ sentiment_comment }}</p>
 
-    <!-- ユーザーの日記テキストを表示（preタグで改行もそのまま） -->
+    <!-- 今日の日記テキストをそのまま改行込みで表示 -->
     <p><strong>今日の日記：</strong></p>
     <pre class="diary-text">{{ diary_text }}</pre>
 
-    <!-- ランダムに選んだ励ましメッセージを表示 -->
+    <!-- ランダム励ましメッセージ -->
     <p class="encourage-message">励ましメッセージ：{{ encourage_message }}</p>
 
-    <!-- シェア・戻る・音楽ボタン（横並びで表示） -->
+    <!-- シェア、音楽、戻るボタンを横並びで配置 -->
     <div style="text-align:center; margin-top: 25px;">
       <a class="share-button" href="https://twitter.com/intent/tweet?text={{ share_text_encoded }}" target="_blank" rel="noopener noreferrer">Xでシェアする</a>
       <a class="music-button" href="{{ selected_music_url }}" target="_blank" rel="noopener noreferrer">疲れを癒す🎵</a>
       <a class="back-button" href="/">戻る</a>
     </div>
+
   </div>
 </body>
 </html>

@@ -8,10 +8,15 @@
 <body>
     <div class="container">
         <h1>🌸 今日一日を振り返ろう 🌸</h1>
+
+        <!-- ユーザー入力フォーム（POSTメソッドで送信） -->
         <form method="POST">
+
+            <!-- 名前入力欄 -->
             <label for="username">名前：</label>
             <input type="text" id="username" name="username" required>
 
+            <!-- 習慣チェックリスト（複数選択可） -->
             <label>今日できた習慣を選んでね：</label>
             <div class="checkbox-group">
                 <label><input type="checkbox" name="habits" value="早起き"> 早起き</label>
@@ -20,6 +25,7 @@
                 <label><input type="checkbox" name="habits" value="日記"> 日記</label>
             </div>
 
+            <!-- 自己評価スコア（1〜5点を選択） -->
             <label for="self_score">自己評価（1〜5点）：</label>
             <select id="self_score" name="self_score" required>
                 <option value="1">1（最低）</option>
@@ -29,9 +35,11 @@
                 <option value="5">5（最高）</option>
             </select>
 
+            <!-- 日記入力欄 -->
             <label for="diary">今日の日記：</label>
             <textarea id="diary" name="diary" rows="5" required></textarea>
 
+            <!-- フォーム送信ボタン -->
             <button type="submit" class="submit-btn">送信</button>
         </form>
     </div>

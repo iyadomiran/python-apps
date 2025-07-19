@@ -2,11 +2,11 @@ body {
     font-family: 'Noto Sans JP', sans-serif;
     background-image: url("../static/images/kumo38.png");
     background-repeat: no-repeat;
-    background-size: cover; /* 背景を画面にフィット */
-    background-position: center center; /* 中央配置 */
+    background-size: cover;
+    background-position: center center;
     margin: 0;
     padding: 0;
-    min-height: 100vh; /* ビューポートの高さを最低限に設定 */
+    min-height: 100vh;
 }
 
 .container {
@@ -78,12 +78,11 @@ textarea {
     background-color: #ec407a;
 }
 
-/* ここからは結果ページ専用の追加スタイル */
-
+/* 結果ページ専用 */
 .result-container {
     max-width: 600px;
     margin: 50px auto 80px auto;
-    background: #fff0f5; /* 薄いピンク背景 */
+    background: #ffffff;
     padding: 30px 40px;
     border-radius: 16px;
     box-shadow: 0 10px 20px rgba(214, 107, 160, 0.3);
@@ -120,23 +119,22 @@ textarea {
     box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.7);
 }
 
-/* バーの高さ、背景、丸角、文字配置、アニメーション追加 */
-.bar {
+.bar-inner {
     height: 100%;
     background: linear-gradient(90deg, #f48fb1, #ec407a);
-    border-radius: 12px 0 0 12px;
-    transition: width 1.5s ease; /* 幅の変化を滑らかに */
-    
+    border-radius: 12px; 
+    transition: width 1.5s ease;
+
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-weight: 700;
     font-size: 14px;
-    user-select: none; /* 文字選択禁止 */
+    user-select: none;
+    overflow: hidden;
 }
 
-/* 日記テキスト表示 */
 .diary-text {
     background-color: #fff0f5;
     padding: 15px 20px;
@@ -148,7 +146,6 @@ textarea {
     margin-top: 12px;
 }
 
-/* 励ましメッセージ */
 .encourage-message {
     font-weight: 600;
     color: #bf467f;
@@ -156,7 +153,6 @@ textarea {
     text-align: center;
 }
 
-/* シェア・戻る・音楽ボタン共通スタイル */
 .share-button, .back-button, .music-button {
     display: inline-block;
     background-color: #f48fb1;
@@ -187,12 +183,11 @@ textarea {
     background-color: #b23a7c;
 }
 
-/* 追加: 習慣達成率に応じたバッジ表示スタイル */
 .badge {
-    text-align: left; /* 左寄せに修正 */
+    text-align: left;
     font-size: 20px;
     margin-top: 15px;
-    color: #5dade2; /* パステルの少し濃いめの水色に調整 */
+    color: #5dade2;
     font-weight: bold;
     user-select: none;
 }
