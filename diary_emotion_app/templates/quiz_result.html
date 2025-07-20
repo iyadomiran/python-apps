@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>クイズ結果</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_quiz.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>結果発表</h1>
+        <p>{{ result }}</p>
+
+        {% if not finished %}
+            <a href="{{ url_for('quiz') }}">
+                <button class="quiz-button">次の問題へ</button>
+            </a>
+        {% else %}
+            <p>全問終了しました！</p>
+            <a href="{{ url_for('quiz_reset') }}">
+                <button class="quiz-button">最初からやり直す</button>
+            </a>
+            <a href="{{ url_for('show_result') }}">
+                <button class="quiz-button">日記結果に戻る</button>
+            </a>
+        {% endif %}
+    </div>
+</body>
+</html>

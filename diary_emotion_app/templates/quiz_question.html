@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>今日のクイズ</title>
+    <!-- クイズ画面用のCSSを読み込み -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_quiz.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>今日のクイズに挑戦！</h1>
+
+        <!-- クイズの質問と選択肢をフォームで表示 -->
+        <form method="POST" action="{{ url_for('submit_answer') }}">
+            <p>{{ question }}</p>
+
+            <!-- 選択肢をラジオボタンで表示（番号付き） -->
+            {% for option in options %}
+                <input type="radio" name="answer" value="{{ loop.index }}" required> {{ option }}<br>
+            {% endfor %}
+
+            <br>
+            <!-- 回答ボタン -->
+            <button type="submit">回答する</button>
+        </form>
+
+        <!-- エラーメッセージがあれば表示 -->
+        {% if error_message %}
+            <p style="color:red;">{{ error_message }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

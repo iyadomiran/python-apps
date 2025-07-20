@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>今日のクイズ</title>
+    <!-- style_quiz.css を読み込む -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_quiz.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- タイトル -->
+        <h1>今日のクイズに挑戦！</h1>
+
+        <!-- 問題数と進行状況を表示 -->
+        <p>問題 {{ question_number }} / {{ total_questions }}</p>
+
+        <!-- タイマー表示用 -->
+        <div id="timer" style="font-weight:bold; color:#e91e63; margin-bottom: 10px;"></div>
+
+        <!-- 問題文を表示 -->
+        <p>{{ question.question }}</p>
+
+        <!-- 選択肢があれば表示する -->
+        {% if question.options %}
+        <form id="quiz-form" method="POST" action="{{ url_for('quiz') }}">
+            <!-- 選択肢を番号付きで表示（ユーザーは番号を入力） -->
+            {% for choice in question.options %}
+                {{ loop.index }}. {{ choice }}<br>
+            {% endfor %}
+
+            <!-- ユーザーが番号を入力 -->
+            <label for="answer">番号を入力（1～3）:</label>
+            <input type="number" name="answer" id="answer" min="1" max="3" required><br><br>
+
+            <!-- 回答送信用ボタン -->
+            <button type="submit">送信</button>
+        </form>
+        {% else %}
+        <!-- 選択肢が存在しない場合 -->
+        <p>選択肢がありません。</p>
+        {% endif %}
+    </div>
+
+    <!-- timer.js を読み込む -->
+    <script src="{{ url_for('static', filename='timer.js') }}"></script>
+</body>
+</html>

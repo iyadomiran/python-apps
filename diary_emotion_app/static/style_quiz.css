@@ -1,0 +1,189 @@
+/* 全体背景とフォント */
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #fff0f5;  /* 優しいピンク背景 */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* メインコンテナ */
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(214, 107, 160, 0.25);
+}
+
+/* 見出し */
+h1 {
+    text-align: center;
+    color: #d66ba0;
+    margin-bottom: 20px;
+}
+
+/* 問題文 */
+.question-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #703559;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* 選択肢ボタン */
+.choice-button {
+    display: block;
+    width: 100%;
+    background-color: #f48fb1;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    user-select: none;
+    box-shadow: 0 4px 8px rgba(214, 107, 160, 0.4);
+}
+
+.choice-button:hover {
+    background-color: #ec407a;
+}
+
+/* 選択済みの選択肢（フィードバック用） */
+.choice-button.selected.correct {
+    background-color: #66bb6a;  /* 緑 */
+    box-shadow: 0 0 10px #66bb6a88;
+    cursor: default;
+}
+
+.choice-button.selected.incorrect {
+    background-color: #ef5350;  /* 赤 */
+    box-shadow: 0 0 10px #ef535088;
+    cursor: default;
+}
+
+/* 正誤判定メッセージ */
+.feedback-message {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 20px;
+    color: #703559;
+}
+
+/* 次の問題ボタン */
+.next-button {
+    display: inline-block;
+    background-color: #f48fb1;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 30px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(214, 107, 160, 0.4);
+    user-select: none;
+}
+
+.next-button:hover {
+    background-color: #ec407a;
+}
+
+/* 正解数・結果ページ用 */
+.quiz-result {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 20px;
+    color: #d66ba0;
+}
+
+/* 問題リストのスタイル（結果ページなど） */
+.quiz-list {
+    margin-top: 25px;
+    padding-left: 20px;
+    color: #703559;
+}
+
+.quiz-list li {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* クイズの選択肢入力欄（番号入力フォーム） */
+input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* 送信ボタン（回答送信） */
+.submit-btn {
+    margin-top: 25px;
+    background-color: #f48fb1;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #ec407a;
+}
+
+/* クイズ送信ボタンを可愛くする */
+button[type="submit"] {
+    background-color: #ffb6c1; /* 淡いピンク */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff8fa3; /* 少し濃いピンクに */
+    transform: scale(1.05);
+}
+/* 全てのクイズ用ボタンに共通の可愛いスタイル */
+.quiz-button {
+    background-color: #ffb6c1;  /* 淡いピンク */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* ホバー時に少し濃く、ふわっと拡大 */
+.quiz-button:hover {
+    background-color: #ff8fa3;
+    transform: scale(1.05);
+}
