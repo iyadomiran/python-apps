@@ -90,8 +90,14 @@ def index():
         sentiment, sentiment_comment = analyze_sentiment(diary_text)
 
         # バッジや励ましメッセージは適宜設定（例として固定値）
-        badge = "努力賞"
-        encourage_message = "今日もよく頑張りましたね！"
+        if achievement_rate >= 90:
+            badge = "Gold 🥇"
+        elif achievement_rate >= 70:
+            badge = "Silver 🥈"
+        else:
+            badge = "Bronze 🥉"
+
+        encourage_message = "今日もお疲れ様です！"
 
         # シェア用テキストをURLエンコード
         share_text = f"{username}さんの今日の感情は「{sentiment}」です。"
