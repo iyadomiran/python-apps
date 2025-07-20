@@ -231,7 +231,6 @@ def show_result():
         encourage_message=encourage_message,
         share_text_encoded=share_text_encoded,
         selected_music_url=selected_music_url,
-        comment=sentiment_comment
     )
 
 # Flaskアプリ起動（このファイルが直接実行されたときのみ起動する）
