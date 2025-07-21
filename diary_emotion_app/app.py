@@ -1,14 +1,16 @@
-# Flaskから必要な3つの機能を読み込む
-# Flask：アプリ本体、render_template：HTML表示、request：送信データを受け取る
-# redirect、url_for はページ遷移に使う、sessionはセッション管理用
+# Flaskから下記機能を使用可能にする
+# Flask：アプリ本体、render_template：HTML表示、request：データを受け取る(日記など)、redirect＆url_for：ページ移動、session：データ一時保存
 from flask import Flask, render_template, request, redirect, url_for, session
+# 感情分析の関数をanalysis/sentiment.pyから読み込む
 from analysis.sentiment import analyze_sentiment
-from urllib.parse import quote  # URLエンコード用
-import random  # ランダム抽出用
+# URLの中で使えない文字を、安全な文字に変換(quote)。エンコード
+from urllib.parse import quote
+import random
 
-# Flaskアプリの初期設定（__name__は今動かしているファイル名が自動セットされる）
+# Flaskアプリを作る宣言
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # セッション使用に必要（適当な文字列にすること）
+# ユーザーごとの情報を安全に保つためのキーを設定
+app.secret_key = "your_secret_key"
 
 music_urls = {
     "summer song - yui": "https://youtu.be/2vH0BXmgnlo?si=mnIwBbsuSETJ4xYA",
@@ -18,7 +20,6 @@ music_urls = {
     "Stand Out Fit In - one ok rock": "https://youtu.be/IGInsosP0Ac?si=eSg69AIHKIfVvc-7",
 }
 
-# クイズの問題一覧
 quiz_questions = [
     {
         "question": "Pythonの拡張子は？",
@@ -72,42 +73,40 @@ quiz_questions = [
     }
 ]
 
-# 日記入力画面と感情分析の処理
+# トップページにアクセス:表示・送信の両方対応
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if request.method == "POST":
-        # フォームから値を受け取る
-        username = request.form.get("username", "")
-        habits = request.form.getlist("habits")  # チェックボックスは getlist を使う
-        self_score = request.form.get("self_score", "")
-        diary_text = request.form.get("diary", "")
+    if request.method == "POST":  # フォーム送信(post)の際は、下記４つ取得。
+        username = request.form.get("username")  # ユーザー名
+        habits = request.form.getlist("habits")  # チェックリスト
+        self_score = request.form.get("self_score")  # 自己評価スコア
+        diary_text = request.form.get("diary")  # 日記
 
-        # 習慣達成率を計算（選択肢4個中の達成割合）
+        # チェックリスト合計４つ
         total_habits = 4
+        # 達成率(%)の計算 (0より大きいなら計算、0なら0%  例: 2/4なら、2/4×100 = 50%)
         achievement_rate = len(habits) / total_habits * 100 if total_habits > 0 else 0
 
-        # 感情分析を実行
+        # analyze_sentiment関数で、感情ポジネガとコメントを、日記から分析
         sentiment, sentiment_comment = analyze_sentiment(diary_text)
 
-        # バッジや励ましメッセージは適宜設定（例として固定値）
+        # バッジ、お疲れコメントを表示
         if achievement_rate >= 90:
-            badge = "Gold 🥇"
+            badge = "🥇"
         elif achievement_rate >= 70:
-            badge = "Silver 🥈"
+            badge = "🥈"
         else:
-            badge = "Bronze 🥉"
-
+            badge = "🥉"
         encourage_message = "今日もお疲れ様です！"
 
-        # シェア用テキストをURLエンコード
+        # Xシェア用URLをエンコード(日本語でURL壊れないように)
         share_text = f"{username}さんの今日の感情は「{sentiment}」です。"
         share_text_encoded = quote(share_text)
 
-        # 疲れを癒す音楽のURL（例）
-        # music_urls からランダムに1つ選択
+        # music_urls からランダムに1つ選択(music_urls.values() → 曲のURL)
         selected_music_url = random.choice(list(music_urls.values()))
 
-        # セッションに保存して別ルートでも使えるようにする
+        # 各ユーザーごとの情報をサーバーに一時保存
         session["username"] = username
         session["habits"] = habits
         session["self_score"] = self_score
@@ -120,105 +119,110 @@ def index():
         session["share_text_encoded"] = share_text_encoded
         session["selected_music_url"] = selected_music_url
 
-        # 結果画面へリダイレクト
+        # 結果画面へ移動 (POST)
         return redirect(url_for("show_result"))
     else:
-        # GETは入力フォーム画面表示
+        # 入力フォーム画面を表示 (GET)
         return render_template("index.html")
 
-# クイズの最初の問題を表示するルート
+# クイズにアクセスされた時
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
+    # クイズの進行情報がセッションに一時保存されてなければ
     if "quiz_order" not in session:
         # 10問中ランダムに5問選んで出題順としてセット
         session["quiz_order"] = random.sample(range(len(quiz_questions)), 5)
+        # 問題番号を 0 にリセット(1問目〜)
         session["current_q"] = 0
+        # 正解・不正解を初期化
         session["last_result"] = ""
-        session["score"] = 0
 
+    # セッションに保存されたクイズをquiz_order に取り出して使う
     quiz_order = session["quiz_order"]
+    # 現在のクイズ番号を変数 current_q に保存
     current_q = session["current_q"]
 
+    # 解答送信されたら
     if request.method == "POST":
-        user_answer = request.form.get("answer", "")
+        # ユーザーの答えを取得
+        user_answer = request.form.get("answer")
+        # 問題のインデックス番号を取り出す
         question_index = quiz_order[current_q]
+        # 正解の番号を取り出してcorrect_answerに入れる
         correct_answer = quiz_questions[question_index]["answer"]
 
-        # 正誤判定（番号の文字列として比較）
-        # user_answer は文字列、answerはintなので変換して比較
+        # user_answer は文字列、answerは整数なので整数(int)に変換して比較
         if user_answer.isdigit() and int(user_answer) == correct_answer:
             result = "正解！"
-            session["score"] += 1
         else:
             result = f"不正解。正解は「{correct_answer}」でした。"
 
-        session["last_result"] = result
-        session["current_q"] = current_q + 1  # 次の問題へ進める
+        session["last_result"] = result  # 正解不正解を保存
+        session["current_q"] = current_q + 1  # 今何問目かカウント
 
-        return redirect(url_for("quiz_result"))
-
+        return redirect(url_for("quiz_result"))  # 結果ページへ
+    
+    # 問題ページを表示するとき
     else:
-        # GETは問題表示
-        if current_q >= len(quiz_order):
-            # 全問終了したら結果画面へ
+        # 現在の問題番号 current_q の出題数が、5以上になったら
+        if current_q >= 5:
+            # 結果ページへ
             return redirect(url_for("quiz_result"))
-
+        
+        # 出題問題のインデックス番号を取り出す
         question_index = quiz_order[current_q]
+        # 問題文・選択肢・正解をquiz_questionsから取る
         question = quiz_questions[question_index]
 
+        # 問題ページ表示(quiz.html)
         return render_template(
             "quiz.html",
-            question=question,
-            question_number=current_q + 1,
-            total_questions=len(quiz_order)
+            question=question,  # 1問分の問題
+            question_number=current_q + 1,  # 今何問目か
+            total_questions=5
         )
 
-# クイズの結果表示ページ
+# クイズの結果ページ
 @app.route("/quiz/result", methods=["GET"])
 def quiz_result():
-    result = session.get("last_result", "")
-    current_q = session.get("current_q", 0)
-    total_questions = len(session.get("quiz_order", []))
-    score = session.get("score", 0)
-    finished = current_q >= total_questions
+    result = session.get("last_result")  # 直前の問題の正解／不正解を取る
+    current_q = session.get("current_q", 0)  # セッションから現在の問題番号を取る、見つからなければ 0（最初）
+    total_questions = 5
+    finished = current_q >= total_questions  # 全問終了したか判断
+
     return render_template(
-        "quiz_result.html",
-        result=result,
-        current_q=current_q,
-        total=total_questions,
-        score=score,
-        finished=finished
+        "quiz_result.html",  # クイズの結果ページを表示
+        result=result,  # 正解 or 不正解
+        current_q=current_q,  # 今何問目か
+        total=total_questions,  # 全部で何問か(5)
+        finished=finished  # 全問終了してればtrue
     )
 
 # クイズを最初からやり直すときのルート
 @app.route("/quiz/reset")
 def quiz_reset():
-    session.pop("quiz_order", None)
-    session["current_q"] = 0
-    session["last_result"] = ""
-    session["score"] = 0
-    return redirect(url_for("quiz"))
+    session.pop("quiz_order")  # session から "quiz_order"（クイズの出題順リスト）を削除
+    session["current_q"] = 0  # 問題番号を 0番目にリセット
+    session["last_result"] = ""   # セッションに保存された正解／不正解をリセット
+    return redirect(url_for("quiz"))  # クイズ開始ページへ移動
 
-# 日記結果画面を別ルートで表示したい場合に追加する例
+# 日記結果画面にアクセスした時
 @app.route("/result")
 def show_result():
     # セッションから値を取得して渡す
-    username = session.get("username")
-    habits = session.get("habits")
-    self_score = session.get("self_score")
-    diary_text = session.get("diary_text")
-    achievement_rate = session.get("achievement_rate")
-    sentiment = session.get("sentiment")
-    sentiment_comment = session.get("sentiment_comment")
-    badge = session.get("badge")
-    encourage_message = session.get("encourage_message")
-    share_text_encoded = session.get("share_text_encoded")
-    selected_music_url = session.get("selected_music_url")
+    username = session.get("username")  # ユーザー名
+    habits = session.get("habits")  # チェックリスト
+    self_score = session.get("self_score")  # 自己評価スコア
+    diary_text = session.get("diary_text")  # 日記
+    achievement_rate = session.get("achievement_rate")  # 習慣達成率（%）
+    sentiment = session.get("sentiment")  # 感情分析ポジネガ
+    sentiment_comment = session.get("sentiment_comment")  # 感情分析コメント
+    badge = session.get("badge")  # 習慣達成率バッジ
+    encourage_message = session.get("encourage_message")  # お疲れコメント
+    share_text_encoded = session.get("share_text_encoded")  # Xシェア時テキスト,URL
+    selected_music_url = session.get("selected_music_url")  # 音楽URL
 
-    if username is None:
-        return redirect(url_for("index"))
-
-    return render_template(
+    return render_template(  # result.htmlで結果ページ表示
         "result.html",
         username=username,
         habits=habits,
@@ -233,6 +237,6 @@ def show_result():
         selected_music_url=selected_music_url,
     )
 
-# Flaskアプリ起動（このファイルが直接実行されたときのみ起動する）
+# Flaskアプリ起動（app.pyが直接実行されたときのみ起動する）
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True)  # デバックモード有効(エラー発生時に詳細表示)
