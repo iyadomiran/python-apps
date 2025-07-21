@@ -107,17 +107,17 @@ def index():
         selected_music_url = random.choice(list(music_urls.values()))
 
         # 各ユーザーごとの情報をサーバーに一時保存
-        session["username"] = username
-        session["habits"] = habits
-        session["self_score"] = self_score
-        session["diary_text"] = diary_text
-        session["achievement_rate"] = achievement_rate
-        session["sentiment"] = sentiment
-        session["sentiment_comment"] = sentiment_comment
-        session["badge"] = badge
-        session["encourage_message"] = encourage_message
-        session["share_text_encoded"] = share_text_encoded
-        session["selected_music_url"] = selected_music_url
+        session["username"] = username  # ユーザー名
+        session["habits"] = habits  # チェックリスト
+        session["self_score"] = self_score  # 自己評価スコア
+        session["diary_text"] = diary_text  # 日記
+        session["achievement_rate"] = achievement_rate  # 習慣達成率（%）
+        session["sentiment"] = sentiment  # 感情分析ポジネガ
+        session["sentiment_comment"] = sentiment_comment  # 感情分析コメント
+        session["badge"] = badge  # 習慣達成率バッジ
+        session["encourage_message"] = encourage_message  # お疲れコメント
+        session["share_text_encoded"] = share_text_encoded  # Xシェア時テキスト,URL
+        session["selected_music_url"] = selected_music_url  # 音楽
 
         # 結果画面へ移動 (POST)
         return redirect(url_for("show_result"))
