@@ -191,7 +191,7 @@ def quiz_result():
     finished = current_q >= total_questions  # 全問終了したか判断
 
     return render_template(
-        "quiz_result.html",  # クイズの結果ページを表示
+        "quiz_last.html",  # クイズの結果ページを表示
         result=result,  # 正解 or 不正解
         current_q=current_q,  # 今何問目か
         total=total_questions,  # 全部で何問か(5)
@@ -222,8 +222,8 @@ def show_result():
     share_text_encoded = session.get("share_text_encoded")  # Xシェア時テキスト,URL
     selected_music_url = session.get("selected_music_url")  # 音楽URL
 
-    return render_template(  # result.htmlで結果ページ表示
-        "result.html",
+    return render_template(  # last.htmlで結果ページ表示
+        "last.html",
         username=username,
         habits=habits,
         self_score=self_score,
