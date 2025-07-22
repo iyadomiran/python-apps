@@ -1,7 +1,7 @@
 def analyze_sentiment(text):
     positive_words = ["嬉", "楽", "幸", "良", "感謝"]
     negative_words = ["悲", "辛", "嫌", "怒", "疲"]
-
+    # ポジネガワードそれぞれの合計をカウント
     pos_count = sum(word in text for word in positive_words)
     neg_count = sum(word in text for word in negative_words)
 
