@@ -7,9 +7,8 @@ Flaskで作成した日記感情分析Webアプリ（Render）
 ⚫︎diary_emotion_app/templates/
 　・index.html：日記入力フォームページ
 　・result.html：感情分析結果表示ページ
-　・quiz.html：クイズまとめページ
-　・quiz_question.html：クイズ1問ずつ出題ページ
-　・quiz_feedback.html：クイズ回答後フィードバックページ
+　・quiz.html：クイズ出題ページ
+　・quiz_last.html：クイズ最後のページ
 ⚫︎diary_emotion_app/static/
 　・style_diary.css：日記画面用スタイル
 　・style_quiz.css：クイズ画面用スタイル
