@@ -222,8 +222,8 @@ def show_result():
     share_text_encoded = session.get("share_text_encoded")  # Xシェア時テキスト,URL
     selected_music_url = session.get("selected_music_url")  # 音楽URL
 
-    return render_template(  # last.htmlで結果ページ表示
-        "last.html",
+    return render_template(  # result.htmlで結果ページ表示
+        "result.html",
         username=username,
         habits=habits,
         self_score=self_score,
