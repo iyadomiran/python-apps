@@ -70,6 +70,106 @@ quiz_questions = [
         "question": "len関数の役割は？",
         "options": ["1. 長さを求める", "2. 足し算する", "3. 型を変える"],
         "answer": 1
+    },
+    {
+        "question": "SQLでデータを取得する命令は？",
+        "options": ["1. SELECT", "2. INSERT", "3. DELETE"],
+        "answer": 1
+    },
+    {
+        "question": "Pythonでリストを作るときに使う記号は？",
+        "options": ["1. {}", "2. []", "3. ()"],
+        "answer": 2
+    },
+    {
+        "question": "JavaScriptで変数を宣言する方法は？",
+        "options": ["1. var / let / const", "2. int / float", "3. def / class"],
+        "answer": 1
+    },
+    {
+        "question": "HTTPのステータスコード 404 は何を意味する？",
+        "options": ["1. サーバーエラー", "2. ページが見つからない", "3. 成功"],
+        "answer": 2
+    },
+    {
+        "question": "Gitでリポジトリをコピーするコマンドは？",
+        "options": ["1. git init", "2. git clone", "3. git push"],
+        "answer": 2
+    },
+    {
+        "question": "オブジェクト指向の特徴でないものは？",
+        "options": ["1. 継承", "2. カプセル化", "3. コンパイル"],
+        "answer": 3
+    },
+    {
+        "question": "Pythonで例外処理に使うキーワードは？",
+        "options": ["1. try-except", "2. if-else", "3. for-while"],
+        "answer": 1
+    },
+    {
+        "question": "HTMLでリンクを作るタグは？",
+        "options": ["1. <div>", "2. <a>", "3. <p>"],
+        "answer": 2
+    },
+    {
+        "question": "Pythonでタプルを作るときに使う記号は？",
+        "options": ["1. []", "2. {}", "3. ()"],
+        "answer": 3
+    },
+    {
+        "question": "JavaScriptで配列の長さを取得するプロパティは？",
+        "options": ["1. .size", "2. .length", "3. .count"],
+        "answer": 2
+    },
+    {
+        "question": "CSSで文字色を指定するプロパティは？",
+        "options": ["1. background-color", "2. font-size", "3. color"],
+        "answer": 3
+    },
+    {
+        "question": "Pythonで改行せずにprintするには？",
+        "options": ["1. print(..., end='')", "2. printline(...)", "3. echo(...)"],
+        "answer": 1
+    },
+    {
+        "question": "SQLでデータを削除する命令は？",
+        "options": ["1. DROP", "2. DELETE", "3. REMOVE"],
+        "answer": 2
+    },
+    {
+        "question": "Pythonで現在の長さを返す関数は？",
+        "options": ["1. size()", "2. length()", "3. len()"],
+        "answer": 3
+    },
+    {
+        "question": "HTMLで画像を表示するタグは？",
+        "options": ["1. <image>", "2. <img>", "3. <pic>"],
+        "answer": 2
+    },
+    {
+        "question": "Pythonで関数を定義するときのキーワードは？",
+        "options": ["1. def", "2. func", "3. function"],
+        "answer": 1
+    },
+    {
+        "question": "Gitで変更内容を保存するコマンドは？",
+        "options": ["1. git commit", "2. git save", "3. git store"],
+        "answer": 1
+    },
+    {
+        "question": "HTTPのステータスコード200は何を意味する？",
+        "options": ["1. 成功", "2. リダイレクト", "3. サーバーエラー"],
+        "answer": 1
+    },
+    {
+        "question": "Pythonでリストから重複を取り除く方法は？",
+        "options": ["1. set()を使う", "2. dict()を使う", "3. tuple()を使う"],
+        "answer": 1
+    },
+    {
+        "question": "HTMLで最も大きい見出しを表すタグは？",
+        "options": ["1. <h6>", "2. <h1>", "3. <title>"],
+        "answer": 2
     }
 ]
 
